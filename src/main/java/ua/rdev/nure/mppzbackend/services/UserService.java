@@ -7,6 +7,7 @@ import ua.rdev.nure.mppzbackend.entities.User;
 import ua.rdev.nure.mppzbackend.exceptions.EmailTakenException;
 import ua.rdev.nure.mppzbackend.repositories.UserRepository;
 import ua.rdev.nure.mppzbackend.requests.RegisterRequest;
+import ua.rdev.nure.mppzbackend.responses.UserStats;
 
 import java.util.Optional;
 
@@ -45,5 +46,14 @@ public class UserService {
         user.setWeight(reg.getWeight());
 
         return userRepository.save(user);
+    }
+
+    public UserStats getUserStats(User user) {
+        double imt = (double)user.getWeight() / (user.getHeight() * user.getHeight());
+        int age = (int)((System.currentTimeMillis() / 1000L - user.getDateOfBirth()) / 365.25);
+        double bmr = 10 * user.getWeight() + 6.25 * user.getHeight() - 5 * (age) + (user.getGender() == User.Gender.MALE ? 5 : -161);
+        double tdee = bmr * 1.5;
+
+        return new UserStats(imt, bmr, tdee);
     }
 }

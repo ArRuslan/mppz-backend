@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.rdev.nure.mppzbackend.entities.User;
 import ua.rdev.nure.mppzbackend.exceptions.InvalidSessionException;
 import ua.rdev.nure.mppzbackend.responses.UserInfoResponse;
+import ua.rdev.nure.mppzbackend.responses.UserStats;
 import ua.rdev.nure.mppzbackend.services.UserService;
 
 @RestController
@@ -28,5 +29,15 @@ public class UserController {
         }
 
         return new UserInfoResponse((User)principal);
+    }
+
+    @GetMapping("/stats")
+    public UserStats getState() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!(principal instanceof User)) {
+            throw new InvalidSessionException();
+        }
+
+        return userService.getUserStats((User)principal);
     }
 }
