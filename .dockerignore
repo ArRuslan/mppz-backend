@@ -1,0 +1,6 @@
+**/.idea
+**/.git
+**/src/test
+**/src/main/resources/application.properties
+**/.gradle
+**/build

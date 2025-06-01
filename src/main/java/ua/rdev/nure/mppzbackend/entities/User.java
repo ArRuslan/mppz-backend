@@ -19,14 +19,23 @@ public class User {
     private String email;
 
     @Setter
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Setter
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
 
     @Setter
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
+
+    @Setter
+    @Column(nullable = false)
+    private Gender gender;
+
+    public static enum Gender {
+        MALE,
+        FEMALE
+    }
 }

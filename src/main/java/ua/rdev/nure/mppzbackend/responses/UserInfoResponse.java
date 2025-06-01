@@ -14,15 +14,15 @@ import ua.rdev.nure.mppzbackend.entities.User;
 public class UserInfoResponse {
     private long id;
     private String email;
-    @JsonProperty("first_name")
-    private String firstName;
-    @JsonProperty("last_name")
-    private String lastName;
+    private String name;
+    private String nickname;
+    private User.Gender gender;
 
     public UserInfoResponse(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
+        this.name = user.getName();
+        this.nickname = user.getNickname();
+        this.gender = user.getGender();
     }
 }

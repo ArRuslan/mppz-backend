@@ -6,12 +6,12 @@ plugins {
 
 group = "ua.rdev.nure"
 version = "0.0.1-SNAPSHOT"
-
+/*
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
-}
+}*/
 
 configurations {
     compileOnly {
@@ -28,6 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework:spring-context-indexer")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
 
     runtimeOnly("mysql:mysql-connector-java:8.0.33")
 

@@ -28,7 +28,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User register(String email, String password, String firstName, String lastName) {
+    public User register(String email, String password, String name, String nickname, User.Gender gender) {
         if(userRepository.findByEmail(email).isPresent()) {
             throw new EmailTakenException(email);
         }
@@ -36,8 +36,9 @@ public class UserService {
         User user = new User();
         user.setEmail(email);
         user.setPasswordHash(passwordEncoder.encode(password));
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
+        user.setName(name);
+        user.setNickname(nickname);
+        user.setGender(gender);
 
         return userRepository.save(user);
     }
