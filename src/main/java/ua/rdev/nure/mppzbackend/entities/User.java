@@ -34,6 +34,18 @@ public class User {
     @Column(nullable = false)
     private Gender gender;
 
+    @Setter
+    @Column(nullable = false)
+    private long dateOfBirth;
+
+    @Setter
+    @Column(nullable = false)
+    private int height;
+
+    @Setter
+    @Column(nullable = false)
+    private int weight;
+
     public static enum Gender {
         MALE,
         FEMALE

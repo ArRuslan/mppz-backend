@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ua.rdev.nure.mppzbackend.entities.User;
 import ua.rdev.nure.mppzbackend.exceptions.EmailTakenException;
 import ua.rdev.nure.mppzbackend.repositories.UserRepository;
+import ua.rdev.nure.mppzbackend.requests.RegisterRequest;
 
 import java.util.Optional;
 
@@ -28,17 +29,20 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User register(String email, String password, String name, String nickname, User.Gender gender) {
-        if(userRepository.findByEmail(email).isPresent()) {
-            throw new EmailTakenException(email);
+    public User register(RegisterRequest reg) {
+        if(userRepository.findByEmail(reg.getEmail()).isPresent()) {
+            throw new EmailTakenException(reg.getEmail());
         }
 
         User user = new User();
-        user.setEmail(email);
-        user.setPasswordHash(passwordEncoder.encode(password));
-        user.setName(name);
-        user.setNickname(nickname);
-        user.setGender(gender);
+        user.setEmail(reg.getEmail());
+        user.setPasswordHash(passwordEncoder.encode(reg.getPassword()));
+        user.setName(reg.getName());
+        user.setNickname(reg.getNickname());
+        user.setGender(reg.getGender());
+        user.setDateOfBirth(reg.getDateOfBirth());
+        user.setHeight(reg.getHeight());
+        user.setWeight(reg.getWeight());
 
         return userRepository.save(user);
     }

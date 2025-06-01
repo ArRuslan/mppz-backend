@@ -17,6 +17,10 @@ public class UserInfoResponse {
     private String name;
     private String nickname;
     private User.Gender gender;
+    @JsonProperty("date_of_birth")
+    private long dateOfBirth;
+    private int height;
+    private int weight;
 
     public UserInfoResponse(User user) {
         this.id = user.getId();
@@ -24,5 +28,8 @@ public class UserInfoResponse {
         this.name = user.getName();
         this.nickname = user.getNickname();
         this.gender = user.getGender();
+        this.dateOfBirth = user.getDateOfBirth();
+        this.height = user.getHeight();
+        this.weight = user.getWeight();
     }
 }

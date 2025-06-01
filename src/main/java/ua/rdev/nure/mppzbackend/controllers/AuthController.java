@@ -32,7 +32,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthResponse register(@RequestBody RegisterRequest regBody) {
-        User user = userService.register(regBody.getEmail(), regBody.getPassword(), regBody.getName(), regBody.getNickname(), regBody.getGender());
+        User user = userService.register(regBody);
         String token = jwtTokenUtil.generateToken(user);
         return new AuthResponse(token, System.currentTimeMillis() / 1000L + ACCESS_TOKEN_VALIDITY_SECONDS);
     }
