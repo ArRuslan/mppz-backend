@@ -49,8 +49,9 @@ public class UserService {
     }
 
     public UserStats getUserStats(User user) {
-        double imt = (double)user.getWeight() / (user.getHeight() * user.getHeight());
-        int age = (int)((System.currentTimeMillis() / 1000L - user.getDateOfBirth()) / 365.25);
+        double userHeightM = (double)user.getHeight() / 100;
+        double imt = (double)user.getWeight() / (userHeightM * userHeightM);
+        int age = (int)((System.currentTimeMillis() / 1000L - user.getDateOfBirth()) / (86400 * 365.25));
         double bmr = 10 * user.getWeight() + 6.25 * user.getHeight() - 5 * (age) + (user.getGender() == User.Gender.MALE ? 5 : -161);
         double tdee = bmr * 1.5;
 

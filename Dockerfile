@@ -2,6 +2,7 @@ FROM openjdk:21-jdk-bookworm AS build
 WORKDIR /build
 COPY . .
 COPY src/main/resources/docker.properties src/main/resources/application.properties
+RUN chmod +x gradlew
 RUN ./gradlew bootJar
 
 FROM openjdk:21-bookworm
